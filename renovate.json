@@ -9,6 +9,12 @@
   },
   "packageRules": [
     {
+      "matchDepTypes": [
+        "action"
+      ],
+      "pinDigests": true
+    },
+    {
       "matchUpdateTypes": [
         "minor",
         "patch"
