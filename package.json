@@ -1,0 +1,32 @@
+{
+  "name": "midi-shell-commands",
+  "version": "1.1.1",
+  "type": "module",
+  "main": "midi-shell-commands.js",
+  "bin": {
+    "midi-shell-commands": "midi-shell-commands.js"
+  },
+  "scripts": {
+    "start": "node midi-shell-commands.js ./scripts",
+    "postinstall": "node lib/post-install.js",
+    "test": "vitest",
+    "test:ci": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "keywords": [],
+  "author": "Dawson Toth",
+  "license": "ISC",
+  "description": "Execute shell scripts on MIDI note events; supports macOS daemon mode via LaunchAgent.",
+  "dependencies": {
+    "easymidi": "^3.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "@vitest/coverage-v8": "^1.6.0",
+    "eslint": "^9.36.0",
+    "globals": "^16.4.0",
+    "vitest": "^1.6.0"
+  }
+}
