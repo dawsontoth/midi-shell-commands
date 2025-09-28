@@ -46,6 +46,9 @@ The application periodically checks for new MIDI input devices and will start li
 
    chmod +x ./scripts/*.sh
 
+On macOS, a LaunchAgent will be installed on npm install that automatically runs this tool in the background watching
+`~/Documents/MidiShellCommands` at login. See Daemon mode below.
+
 ## Usage
 
 You can run the tool in a few ways:
@@ -64,7 +67,7 @@ You can run the tool in a few ways:
 
 - Or directly with Node, specifying the path to your scripts directory:
 
-  node index.js ./scripts
+  node midi-shell-commands.js ./scripts
 
 Replace `./scripts` with the path to your own directory containing executable scripts.
 
@@ -95,6 +98,21 @@ Make it executable:
 chmod +x scripts/noteon.60.sh
 ```
 
+## Daemon mode (macOS)
+
+- On macOS, when you run `npm install` for this package, it will:
+  - Create the directory `~/Documents/MidiShellCommands` if it does not exist.
+  - Install a LaunchAgent at `~/Library/LaunchAgents/com.midi-shell-commands.plist` that starts `midi-shell-commands` at login, watching
+    that directory.
+  - Attempt to load the LaunchAgent immediately so it begins running right away.
+- Logs can be found at `~/Library/Logs/midi-shell-commands.stdout.log` and `~/Library/Logs/midi-shell-commands.stderr.log`.
+- To manage the LaunchAgent manually:
+  - Reload:
+    `launchctl unload ~/Library/LaunchAgents/com.midi-shell-commands.plist && launchctl load -w ~/Library/LaunchAgents/com.midi-shell-commands.plist`
+  - Disable autostart: `launchctl unload -w ~/Library/LaunchAgents/com.midi-shell-commands.plist`
+  - Remove: delete the plist file and unload it.
+- If you run `midi-shell-commands` with no arguments, it will also default to watching `~/Documents/MidiShellCommands`.
+
 ## Notes and behavior
 
 - Only non-hidden files in the scripts directory are considered (files not starting with a dot).
@@ -118,7 +136,7 @@ chmod +x scripts/noteon.60.sh
 
 ## Development
 
-- Main entry: `index.js`
+- Main entry: `midi-shell-commands.js`
 - Dependencies: `easymidi`
 - Helpful npm scripts:
   - `npm start` — starts the watcher using `./scripts` as the scripts directory.
