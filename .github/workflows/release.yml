@@ -17,12 +17,13 @@ permissions:
   id-token: write
 
 concurrency:
-  group: semantic-release-main
+  group: Release
   cancel-in-progress: false
 
 jobs:
   release:
     name: Semantic Release
+    environment: Release
     # Ensure releases run only when code reaches main via GitHub Merge Queue, or when manually dispatched
     runs-on: ubuntu-latest
     steps:
