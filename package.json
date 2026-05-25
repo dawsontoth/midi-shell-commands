@@ -1,6 +1,6 @@
 {
   "name": "midi-shell-commands",
-  "version": "1.2.56",
+  "version": "1.2.57",
   "author": "Dawson Toth",
   "repository": "https://github.com/dawsontoth/midi-shell-commands.git",
   "scripts": {
